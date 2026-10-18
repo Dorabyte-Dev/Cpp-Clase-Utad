@@ -1,0 +1,13 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Practica1/Practica1.vcxproj" Id="4fca9775-6cc3-4659-9339-d81c847b310c" />
+  <Project Path="Practica2/Practica2.vcxproj" Id="92eb17d0-40ed-442a-896e-052ff884b746" />
+  <Project Path="Practica3/Practica3.vcxproj" Id="a507bb12-550c-4676-a078-6faf5f3c5676" />
+  <Project Path="Practica4/Practica4.vcxproj" Id="39478f9d-959d-41f9-b71b-93c4d598e3bf" />
+  <Project Path="Practica5/Practica5.vcxproj" Id="65bf870c-dd9a-43a8-a1e7-1c1aaf07c1aa" />
+  <Project Path="Practica6/Practica6.vcxproj" Id="71c1e9b7-6486-4949-8f6c-602645f9489b" />
+</Solution>
