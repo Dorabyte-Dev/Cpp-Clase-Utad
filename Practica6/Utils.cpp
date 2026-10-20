@@ -165,5 +165,7 @@ namespace Utils
 		int iSum = 0;
 		SumNumbers("numeros.txt", iSum);
 		printf("The sum of all numbers is %d\n", iSum);
+
+		return 0;
 	}
 }

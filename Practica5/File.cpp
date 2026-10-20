@@ -2,19 +2,33 @@
 #include <cstdio>
 #include "File.h"
 
-void* FileOpen(const char* pszName, EFileMode eMode) 
+TFile::TFile() : m_pFile(nullptr)
+{
+
+}
+TFile::~TFile()
+{
+	if(m_pFile != nullptr)
+	{
+		FileClose();
+	}
+}
+
+void TFile::FileOpen(const char* pszName, EFileMode eMode) 
 {
 	const char* cMode = (eMode == FILE_READ) ? "rb" : "wb";
 	FILE* file = fopen(pszName, cMode);
-	return file;
+	m_pFile = file;
 }
-bool FileClose(void* pFile) 
+bool TFile::FileClose() 
 {
-	return fclose(static_cast<FILE*>(pFile)) == 0;
+	bool bCloseSucceed = fclose(static_cast<FILE*>(m_pFile)) == 0;
+	m_pFile = nullptr;
+	return bCloseSucceed;
 }
-unsigned int FileRead(void* pFile, char* pBuffer, unsigned int uSize)
+unsigned int TFile::FileRead(char* pBuffer, unsigned int uSize)
 {
-	FILE* file = static_cast<FILE*>(pFile);
+	FILE* file = static_cast<FILE*>(m_pFile);
 	if(file == nullptr)
 	{
 		printf("File is null, cancelling read operation.");
@@ -25,9 +39,9 @@ unsigned int FileRead(void* pFile, char* pBuffer, unsigned int uSize)
 	*(pBuffer + uBytesRead) = '\0';
 	return uBytesRead;
 }
-unsigned int FileWrite(void* pFile, const char* pBuffer, unsigned int uSize)
+unsigned int TFile::FileWrite(const char* pBuffer, unsigned int uSize)
 {
-	return fwrite(pBuffer, sizeof(char), uSize, static_cast<FILE*>(pFile));
+	return fwrite(pBuffer, sizeof(char), uSize, static_cast<FILE*>(m_pFile));
 }
 
 const unsigned int uBufferSize = 128;
@@ -39,23 +53,24 @@ int main()
 	char s_writeBuffer[] = "Esto es un texto de prueba. 12345. See you next mission";
 	unsigned int uWriteBufferSize = sizeof(s_writeBuffer) / sizeof(char);
 	
-	FILE* myFile = static_cast<FILE*>(FileOpen(s_fileName, FILE_WRITE));
+	TFile myFile;
+	myFile.FileOpen(s_fileName, TFile::FILE_WRITE);
 
-	unsigned int uBytesWritten = FileWrite(myFile, s_writeBuffer, uWriteBufferSize);
 
-	FileClose(myFile);
+	unsigned int uBytesWritten = myFile.FileWrite(s_writeBuffer, uWriteBufferSize);
+
+	myFile.FileClose();
 
 	//Read file and print it to console
 	char s_readBuffer[uBufferSize];
-	myFile = static_cast<FILE*>(FileOpen(s_fileName, FILE_READ));
+	myFile.FileOpen(s_fileName, TFile::FILE_READ);
 
-	unsigned int uBytesRead = FileRead(myFile, s_readBuffer, uBufferSize);
+	unsigned int uBytesRead = myFile.FileRead(s_readBuffer, uBufferSize);
 
 	printf("I have read %d bytes from the file:\n%s\n", uBytesRead, s_readBuffer);
 
 	//Read file that doesn't exist
+	myFile.FileOpen("noExiste.txt", TFile::FILE_READ);
 
-	myFile = static_cast<FILE*>(FileOpen("noExiste.txt", FILE_READ));
-
-	unsigned int uBytesRead2 = FileRead(myFile, s_readBuffer, uBufferSize);
+	unsigned int uBytesRead2 = myFile.FileRead(s_readBuffer, uBufferSize);
 }
