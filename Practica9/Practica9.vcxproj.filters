@@ -10,6 +10,9 @@
     <ClCompile Include="TList.cpp">
       <Filter>Files</Filter>
     </ClCompile>
+    <ClCompile Include="Prueba.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TList.h">

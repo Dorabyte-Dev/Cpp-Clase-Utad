@@ -19,6 +19,15 @@
 //     lista.Reset();                         // lista vacía -> Size() == 0
 // ***************************************************************************************
 #pragma once
+class TElem
+{
+
+public:
+    TElem(const char* psz);
+    ~TElem();
+    char* m_psz = nullptr;
+    TElem* m_pNext = nullptr;
+};
 
 class TList
 {
@@ -57,12 +66,4 @@ private:
 	TElem* m_pFirst;
 	TElem* m_pLast;
 	TElem* m_pCurrent;
-};
-
-class TElem {
-
-public:
-    TElem(const char* psz);
-    const char* m_psz;
-    TElem* m_pNext;
 };

@@ -146,26 +146,27 @@ namespace Utils
 
 	}
 
-	const char* s_tTablaDeCadenas[] =
+	
+}
+const char* s_tTablaDeCadenas[] =
+{
+	"enemigo",
+	"Enemigo",
+	"aa",
+	"xyz"
+};
+
+int main()
+{
+	for(const char* sWord : s_tTablaDeCadenas)
 	{
-		"enemigo",
-		"Enemigo",
-		"aa",
-		"xyz"
-	};
-
-	int main()
-	{
-		for(const char* sWord : s_tTablaDeCadenas)
-		{
-			printf("Ocurrences of %s are %d\n", sWord, CountOcurrences("texto.txt", sWord));
-		}
-
-
-		int iSum = 0;
-		SumNumbers("numeros.txt", iSum);
-		printf("The sum of all numbers is %d\n", iSum);
-
-		return 0;
+		printf("Ocurrences of %s are %d\n", sWord, Utils::CountOcurrences("texto.txt", sWord));
 	}
+
+
+	int iSum = 0;
+	Utils::SumNumbers("numeros.txt", iSum);
+	printf("The sum of all numbers is %d\n", iSum);
+
+	return 0;
 }

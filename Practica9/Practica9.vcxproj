@@ -140,6 +140,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Prueba.cpp" />
     <ClCompile Include="TList.cpp" />
   </ItemGroup>
   <ItemGroup>

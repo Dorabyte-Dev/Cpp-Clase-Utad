@@ -6,26 +6,32 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Practica6\File.cpp">
+    <ClCompile Include="File.cpp">
       <Filter>Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Practica6\Utils.cpp">
+    <ClCompile Include="Utils.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TList.cpp">
       <Filter>Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Practica6\File.h">
+    <ClInclude Include="File.h">
       <Filter>Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Practica6\Utils.h">
+    <ClInclude Include="Utils.h">
+      <Filter>Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TList.h">
       <Filter>Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Practica6\numeros.txt">
+    <Text Include="numeros.txt">
       <Filter>Files</Filter>
     </Text>
-    <Text Include="..\Practica6\texto.txt">
+    <Text Include="texto.txt">
       <Filter>Files</Filter>
     </Text>
   </ItemGroup>
