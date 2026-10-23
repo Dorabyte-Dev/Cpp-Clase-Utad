@@ -1,6 +1,14 @@
 #pragma once
 #include "IListItem.h"
+class TElem
+{
 
+public:
+    TElem(IListItem* item);
+    ~TElem();
+    IListItem* m_item = nullptr;
+    TElem* m_pNext = nullptr;
+};
 class TList
 {
 public:
@@ -29,7 +37,7 @@ public:
 
 private:
 	unsigned int uSize;
-	IListItem* m_pFirst;
-	IListItem* m_pLast;
-	IListItem* m_pCurrent;
+	TElem* m_pFirst;
+    TElem* m_pLast;
+    TElem* m_pCurrent;
 };

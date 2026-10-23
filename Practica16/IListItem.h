@@ -2,7 +2,6 @@
 class IListItem
 {
 public:
-	IListItem* m_pNext = nullptr;
 	virtual ~IListItem() {}
 	virtual IListItem* Clone() const = 0;
 	virtual void Print() const = 0;

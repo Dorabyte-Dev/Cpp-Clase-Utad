@@ -25,7 +25,7 @@ class TElem
 public:
     TElem(const char* psz);
     ~TElem();
-    char* m_psz = nullptr;
+    char* m_item = nullptr;
     TElem* m_pNext = nullptr;
 };
 
