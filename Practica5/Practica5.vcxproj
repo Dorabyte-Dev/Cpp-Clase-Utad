@@ -19,14 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="copia.txt" />
+    <Text Include="numeros.txt" />
+    <Text Include="texto.txt" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="File.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="File.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="numeros.txt" />
-    <Text Include="texto.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>

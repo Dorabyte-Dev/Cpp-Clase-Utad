@@ -24,5 +24,10 @@ int main()
 
 	printf("Sizeof(TStack<int, 4>) = %d\n", sizeof(TStack<int, 4>)); //20
 	printf("Sizeof(TStack<int, 100>) = %d\n", sizeof(TStack<int, 100>)); //404
-	//
+	
+	// ¿Son el mismo tipo?
+	// No, ya que el compilador, al trabajar con templates, crea una clase nueva cada vez que
+	// se usa TStack con parámetros distintos. Da igual que ambas TStack sean int, porque como
+	// el parámetro SIZE cambia, el compilador crea una clase diferente para cada una y las 
+	// trata como tipos diferentes.
 }

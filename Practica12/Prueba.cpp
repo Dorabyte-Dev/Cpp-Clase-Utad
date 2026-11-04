@@ -1,8 +1,21 @@
 #include <iostream>
 #include "TList.h"
+#include "TVector2.h"
 
 int main()
 {
+	printf("-------TVector2-------\n");
+	TVector2 vPos(1, 2);
+	TVector2 vVel(3, 4);
+
+	vPos += vVel * 0.5f;
+	std::cout << "vPos is " << vPos << "\n";
+	std::cout << "2.0f * vVel is " << (2.0f * vVel) << "\n";
+	std::cout << "-vVel is " << (- vVel) << "\n";
+
+
+	printf("-------TList-------\n");
+
 	TList tList;
 	
 	tList.Push("uno");

@@ -17,16 +17,20 @@ unsigned int ToggleInfiniteBulletMode(unsigned int _uData, bool _bActive);
 
 int main()
 {
-    unsigned int uData = 0x8E252006;
+    unsigned int uData = 0x641E3005;
     printf("Bullet Number is %d\n", GetBulletNum(uData));
 
-    uData = AddBullets(uData, 5);
+    uData = AddBullets(uData, 10);
+
+    printf("Bullet Number is %d\n", GetBulletNum(uData));
+
+    uData = AddBullets(uData, 250);
 
     printf("Bullet Number is %d\n", GetBulletNum(uData));
 
     printf("Infinite Bullets mode is %s\n", IsInfiniteBulletsModeActive(uData) ? "active" : "inactive");
 
-    uData = ToggleInfiniteBulletMode(uData, false);
+    uData = ToggleInfiniteBulletMode(uData, true);
 
     printf("Infinite Bullets mode is %s\n", IsInfiniteBulletsModeActive(uData) ? "active" : "inactive");
 }

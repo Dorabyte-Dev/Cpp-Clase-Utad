@@ -1,55 +1,50 @@
 #include <iostream>
 
-void SeparateIntToBytes(int iValue)
+void SeparateIntToBytes(int _iValue)
 {
 
-    unsigned char* pChar = reinterpret_cast<unsigned char*>(&iValue);
+    unsigned char* pChar = reinterpret_cast<unsigned char*>(&_iValue);
     printf("First byte is: %02X\n", *pChar);
     printf("Second byte is: %02X\n", *(pChar + 1));
     printf("Third byte is: %02X\n", *(pChar + 2));
     printf("Fourth byte is: %02X\n", *(pChar + 3));
 }
 
-void GetHighestFromTable()
+void GetHighestFromTable(int* _piTabla, int _iSize)
 {
-    int tabla[] = { 1, 3, 2, 5, 3, static_cast<int>(0xFFFFFFFF), 0x00FF0002, 2 };
+    _iSize /= sizeof(int);
 
-    int* piTabla = tabla;
+    int iCurrentHighest = *_piTabla;
 
-    int iCurrentHighest = *piTabla;
-
-    for (int i = 0; i < sizeof(tabla) / sizeof(int); ++i)
+    for (int i = 0; i < _iSize; ++i)
     {
-        if (*(piTabla + i) > iCurrentHighest)
+        if (*(_piTabla + i) > iCurrentHighest)
         {
-            iCurrentHighest = *(piTabla + i);
+            iCurrentHighest = *(_piTabla + i);
         }
     }
 
     printf("El entero mayor es %i\n", iCurrentHighest);
 }
 
-void GetHighestAddressFromTable()
+void GetHighestAddressFromTable(int* _piTabla, int _iSize)
 {
-    int tabla[] = { 1, 3, 2, 5, 3, static_cast<int>(0xFFFFFFFF), 0x00FF0002, 2 };
+    _iSize /= sizeof(unsigned char);
 
-    int* piTabla = tabla;
-
-    unsigned char* pcTabla = reinterpret_cast<unsigned char*>(piTabla);
+    unsigned char* pcTabla = reinterpret_cast<unsigned char*>(_piTabla);
 
     unsigned char* pcCurrentHighest = pcTabla;
 
-    for (int i = 0; i < sizeof(tabla) / sizeof(unsigned char); i++)
+    for (int i = 0; i < _iSize; i++)
     {
         if (*(pcTabla + i) > *pcCurrentHighest)
         {
-            *pcCurrentHighest = *(pcTabla + i);
             pcCurrentHighest = pcTabla + i;
         }
     }
 
     printf("El byte mayor es %02X\n", *pcCurrentHighest);
-    printf("La direccion en memoria del byte mayor es %02X\n", pcCurrentHighest);
+    printf("La direccion en memoria del byte mayor es %p\n", pcCurrentHighest);
 }
 
 void FlipString(char* myString)
@@ -78,17 +73,21 @@ void FlipString(char* myString)
 
 int main()
 {
+    //a.
     int iValue = 0x00FF0002;
+    SeparateIntToBytes(iValue); //Se imprime en el orden inverso porque en Windows los bytes se ordenan mediante el método Little-Endian. 
+                                //En Linux y otras arquitecturas Big-Endian, el orden sería el contrario.
+    
+    //b.
+    int tabla[] = { 1, 3, 2, 5, 3, static_cast<int>(0xFFFFFFFF), 0x00FF0002, 2 };
+    GetHighestFromTable(tabla, sizeof(tabla)); //0xFFFFFFFF, a pesar de ser el byte con el valor más alto, al interpretarse como
+                                                             //un int, su valor se lee como -1, y por tanto el más alto es 0x00FF0002, o 16711682
 
-    SeparateIntToBytes(iValue);
+    //c.
+    GetHighestAddressFromTable(tabla, sizeof(tabla));
 
-    GetHighestFromTable();
-
-    GetHighestAddressFromTable();
-
+    //d.
     char sString[] = "Hello";
     FlipString(sString);
 
 }
-
-

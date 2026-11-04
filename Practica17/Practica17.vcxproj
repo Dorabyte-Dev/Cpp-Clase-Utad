@@ -139,7 +139,9 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Macros.cpp" />
     <ClCompile Include="NoMacros.cpp" />
+    <ClCompile Include="Prueba.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

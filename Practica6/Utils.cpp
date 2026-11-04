@@ -10,6 +10,66 @@ namespace Utils
 
 	int CountOcurrences(const char* pszFileName, const char* pszText)
 	{
+		const unsigned int uSubstringLength = strlen(pszText);
+		int iOcurrenceCount = 0;
+		char s_Buffer[uBufferSize];
+
+		FILE* myFile = static_cast<FILE*>(File::FileOpen(pszFileName, File::FILE_READ));
+
+		if(myFile == nullptr) //Check if file is valid
+		{
+			printf("File not found, cancelling operation.");
+			return -1;
+		}
+
+		if(uSubstringLength == 0)
+		{
+			printf("The substring to find cannot be empty, cancelling operation.");
+			return 0;
+		}
+
+		char* pWindow = new char[uSubstringLength];
+		unsigned int uFilled = 0;
+
+		char* pTextPointer = s_Buffer;
+
+		unsigned int uBytesRead = 0;
+
+		do
+		{
+			uBytesRead = File::FileRead(myFile, s_Buffer, uBufferSize);			
+
+			for(int i = 0; i < uBytesRead; ++i)
+			{
+
+				if(uFilled < uSubstringLength)
+				{
+					pWindow[uFilled++] = s_Buffer[i]; //If window is not filled completely, continue filling it
+				}
+				else
+				{
+					memmove(pWindow, pWindow + 1, uSubstringLength - 1); //Move the reading window each time a new character needs to be read
+					pWindow[uSubstringLength - 1] = s_Buffer[i];
+				}
+
+				if(uFilled == uSubstringLength && memcmp(pWindow, pszText, uSubstringLength) == 0)
+				{
+					++iOcurrenceCount;
+				}
+			}
+
+		} while(uBytesRead == uBufferSize - 1); //if buffer has been filled completely, it will continue reading from after the last character read
+
+		delete[] pWindow;
+		File::FileClose(myFile);
+		return iOcurrenceCount;
+
+	}
+
+	//Previous version, no compare window
+
+	/*int CountOcurrences(const char* pszFileName, const char* pszText)
+	{
 		unsigned int uSubstringLength = strlen(pszText);
 		int iOcurrenceCount = 0;
 		char s_Buffer[uBufferSize];
@@ -31,8 +91,6 @@ namespace Utils
 
 		do
 		{
-			fseek(myFile, (uBufferSize - 1) * iNumberOfReads, SEEK_SET);
-
 			uBytesRead = File::FileRead(myFile, s_Buffer, uBufferSize);
 
 			if(uLastOccurrenceNumber != 0) //If an occurrence check was cut, it continues the operation on the new buffer
@@ -91,13 +149,14 @@ namespace Utils
 		File::FileClose(myFile);
 		return iOcurrenceCount;
 
-	}
+	}*/
 
 	bool SumNumbers(const char* pszFileName, int& iSum_)
 	{
 		char s_Buffer[uBufferSize];
 		char s_Tmp[uBufferSize] = { '\0' };
 		char* ps_Tmp = s_Tmp;
+
 		FILE* myFile = static_cast<FILE*>(File::FileOpen(pszFileName, File::FILE_READ));
 
 		if(myFile == nullptr)
@@ -107,6 +166,7 @@ namespace Utils
 		}
 
 		unsigned int uBytesRead;
+
 
 		do
 		{

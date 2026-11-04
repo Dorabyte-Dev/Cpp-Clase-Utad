@@ -168,4 +168,13 @@ int main()
 	for(CEntity* pEntity : tEntities)
 		delete pEntity;
 		
+	//f. Si mañana hay que añadir un nuevo tipo de personaje, ¿qué habría que
+	//   cambiar en el bucle de turnos ? ¿Y si Update no fuera virtual ?
+
+	// La respuesta es nada. Ya que el bucle está diseñado con herencia en mente, simplemente llama 
+	// al Update de cada una de las CEntity que tiene en la lista, independientemente de su clase 
+	// real. Si Update no fuera virtual, habría que comprobar de alguna manera cuál es la clase de 
+	// cada elemento y llamar a su Update concreto. Y peor, si se añade un personaje nuevo, o 100, 
+	// habría que modificar el Update para añadir todas estas nuevas llamadas a función, condiciones 
+	// y demás.  
 }

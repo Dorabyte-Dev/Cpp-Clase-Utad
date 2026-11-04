@@ -140,14 +140,14 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Practica5\File.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Practica5\File.h" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="..\Practica5\numeros.txt" />
     <Text Include="..\Practica5\texto.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="File.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="File.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

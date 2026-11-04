@@ -10,5 +10,11 @@
     <ClCompile Include="NoMacros.cpp">
       <Filter>Files</Filter>
     </ClCompile>
+    <ClCompile Include="Macros.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Prueba.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

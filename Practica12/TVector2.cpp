@@ -47,12 +47,12 @@ TVector2 operator-(TVector2& _a, const TVector2& _b)
     return _a -= _b;
 }
 
-TVector2 operator*(const float& _f, const TVector2& _in)
+TVector2 operator*(const float _f, const TVector2& _in)
 {
     return TVector2(_in.x * _f, _in.y * _f);
 }
 
-TVector2 operator*(const TVector2& _in, const float& _f)
+TVector2 operator*(const TVector2& _in, const float _f)
 {
     return TVector2(_in.x * _f, _in.y * _f);
 }
@@ -75,5 +75,5 @@ bool operator!=(const TVector2& _a, const TVector2& _b)
 std::ostream& operator<<(std::ostream& os, const TVector2& _in)
 {
     
-    return os << "( " << _in.x << ", " << _in.y << ")";
+    return os << "(" << _in.x << ", " << _in.y << ")";
 }

@@ -7,6 +7,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CEntity.cpp" />
+    <ClCompile Include="CEntity.cpp">
+      <Filter>Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

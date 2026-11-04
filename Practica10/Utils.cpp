@@ -11,84 +11,57 @@ namespace Utils
 
 	int CountOcurrences(const char* pszFileName, const char* pszText)
 	{
-		unsigned int uSubstringLength = strlen(pszText);
+		const unsigned int uSubstringLength = strlen(pszText);
 		int iOcurrenceCount = 0;
 		char s_Buffer[uBufferSize];
+
 		FILE* myFile = static_cast<FILE*>(File::FileOpen(pszFileName, File::FILE_READ));
 
-		//Check if file is valid
-		if(myFile == nullptr)
+		if(myFile == nullptr) //Check if file is valid
 		{
 			printf("File not found, cancelling operation.");
 			return -1;
 		}
 
+		if(uSubstringLength == 0)
+		{
+			printf("The substring to find cannot be empty, cancelling operation.");
+			return 0;
+		}
+
+		char* pWindow = new char[uSubstringLength];
+		unsigned int uFilled = 0;
+
 		char* pTextPointer = s_Buffer;
 
-		int iNumberOfReads = 0;
 		unsigned int uBytesRead = 0;
-		unsigned int uBytesReadSecondBuffer = 0;
-		unsigned int uLastOccurrenceNumber = 0;
 
 		do
 		{
-			fseek(myFile, (uBufferSize - 1) * iNumberOfReads, SEEK_SET);
-
 			uBytesRead = File::FileRead(myFile, s_Buffer, uBufferSize);
-
-			if(uLastOccurrenceNumber != 0) //If an occurrence check was cut, it continues the operation on the new buffer
-			{
-				bool bIsNewOccurrence = true;
-				for(int i = uLastOccurrenceNumber; i < uSubstringLength; ++i)
-				{
-					if(*(pTextPointer + i - uLastOccurrenceNumber) != *(pszText + i))
-					{
-						bIsNewOccurrence = false;
-						break;
-					}
-				}
-				if(bIsNewOccurrence)
-				{
-					iOcurrenceCount++;
-				}
-			}
-
-			uLastOccurrenceNumber = 0;
 
 			for(int i = 0; i < uBytesRead; ++i)
 			{
-				if(*(pTextPointer + i) == *pszText) //same letter encounter
-				{
-					bool bIsNewOccurrence = true;
-					for(int j = 1; j < uSubstringLength; ++j) //for each consecutive letter encounter, breaks when not equal
-					{
-						if(j >= uBytesRead - i) //if buffer ends while a substring is being read
-						{
-							uLastOccurrenceNumber = j;
-							break;
-						}
 
-						if(*(pTextPointer + i + j) != *(pszText + j))
-						{
-							bIsNewOccurrence = false;
-							break;
-						}
-					}
-					if(uLastOccurrenceNumber != 0)
-					{
-						break;
-					}
-					if(bIsNewOccurrence)
-					{
-						iOcurrenceCount++;
-					}
+				if(uFilled < uSubstringLength)
+				{
+					pWindow[uFilled++] = s_Buffer[i]; //If window is not filled completely, continue filling it
+				}
+				else
+				{
+					memmove(pWindow, pWindow + 1, uSubstringLength - 1); //Move the reading window each time a new character needs to be read
+					pWindow[uSubstringLength - 1] = s_Buffer[i];
+				}
+
+				if(uFilled == uSubstringLength && memcmp(pWindow, pszText, uSubstringLength) == 0)
+				{
+					++iOcurrenceCount;
 				}
 			}
-			iNumberOfReads++;
 
 		} while(uBytesRead == uBufferSize - 1); //if buffer has been filled completely, it will continue reading from after the last character read
 
-
+		delete[] pWindow;
 		File::FileClose(myFile);
 		return iOcurrenceCount;
 

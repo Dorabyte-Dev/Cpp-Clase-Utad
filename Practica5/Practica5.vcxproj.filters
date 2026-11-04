@@ -7,6 +7,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="numeros.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="texto.txt">
+      <Filter>Files</Filter>
+    </Text>
+    <Text Include="copia.txt">
+      <Filter>Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="File.cpp">
       <Filter>Files</Filter>
     </ClCompile>
@@ -15,13 +26,5 @@
     <ClInclude Include="File.h">
       <Filter>Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="numeros.txt">
-      <Filter>Files</Filter>
-    </Text>
-    <Text Include="texto.txt">
-      <Filter>Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>
